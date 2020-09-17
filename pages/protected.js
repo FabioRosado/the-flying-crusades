@@ -31,10 +31,30 @@ export async function getServerSideProps(context) {
   // data avalible only to authenticated users, you can do that here by checking
   // the session object is not null or by accessing the contents of session.user
   const session = await getSession(context)
+  let character
 
   // TODO: Remove hardcoded name on fetch! 
-  const response = await fetch('http://localhost:3000/api/get-character', {method: "POST", body: JSON.stringify({"name": 'theflyingdev'})})
-  const character = await response.json()
+  try {
+    const response = await fetch('http://localhost:3000/api/get-character', {method: "POST", body: JSON.stringify({"name": 'theflyingdev'})})
+    character = await response.json()
+  } 
+  catch {
+    character = {
+      "name": "bob", 
+      "class": "adventurer", 
+      "gold": 500, 
+      "inventory": {
+          "head": null,
+          "body": null,
+          "r-hand": null,
+          "l-hand": null,
+          "legs": null,
+          "feet": null,
+          "items": {"potion": 1}
+        } 
+    }
+  }
+
 
   return {
     props: { session, character }

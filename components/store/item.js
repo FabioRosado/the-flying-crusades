@@ -3,8 +3,11 @@ import styles from "./item.module.css"
 
 const Item = ({details, character}) => {
     const [bought, setBought] = useState(false)
+    const [error, setError] = useState(false)
     const item = details
     const characterDetails = character
+
+    console.log(character)
 
     const buyItem = (charaterDetails, itemDetails) => {
         fetch("http://localhost:3000/api/buy-item", 
@@ -16,9 +19,13 @@ const Item = ({details, character}) => {
         .then(result => result.json())
         .then(character => {
             setBought(true)
-            localStorage.setItem("character", character)    
+            localStorage.setItem("character", JSON.stringify(character))    
         } )
-        .catch(error => console.warn(error))
+        .catch(error => {
+            console.warn("error")
+            console.log(error.status, error.message)
+            setError(error)
+        })
     }
 
     return (

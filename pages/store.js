@@ -9,12 +9,8 @@ export default () => {
 
     useEffect(() => {
         const char = localStorage.getItem("character")
-
         setCharacter(JSON.parse(char))
-
     }, [])
-
-    console.log(character)
 
     return (
         <Layout>

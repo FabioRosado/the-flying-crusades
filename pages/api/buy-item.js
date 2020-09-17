@@ -4,7 +4,6 @@ export default async function (req, res) {
     const data = JSON.parse(req.body)
 
     const { item } = data
-
     const charName = data.character.name
 
     try {
@@ -34,7 +33,9 @@ export default async function (req, res) {
         return res.status(200).end(JSON.stringify(character))
     }
     catch(error) {
-
-        return res.status(500).end(JSON.stringify(error))
+        return res.status(500).end("An error occurred when attempting to connect or updating the databse")
+    }
+    finally {
+        await client.close()
     }
 }
