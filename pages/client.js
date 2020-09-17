@@ -1,6 +1,15 @@
 import Layout from '../components/layout'
 
-export default () => (
+import { useEffect } from "react"
+
+export default () => {
+
+  useEffect(() => {
+    const character = localStorage.getItem('character')
+
+  }, [])
+
+  return (
   <Layout>
     <h1>Client Side Rendering</h1>
     <p>
@@ -17,4 +26,4 @@ export default () => (
       The disadvantage of <strong>useSession()</strong> is that it requires client side JavaScript.
     </p>
   </Layout>
-)
+  )}

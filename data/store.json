@@ -1,0 +1,22 @@
+[
+    {
+        "name": "potion",
+        "cost": 5,
+        "image": "Ace_SPADED-STAG.png"
+    },
+    {
+        "name": "revive",
+        "cost": 50,
+        "image": "../images/Ace_SPADED-STAG.png"
+    },
+    {
+        "name": "dagger",
+        "cost": 150,
+        "image": "../images/Ace_SPADED-STAG.png"
+    },
+    {
+        "name": "shield",
+        "cost": 30,
+        "image": "../images/Ace_SPADED-STAG.png"
+    }
+]

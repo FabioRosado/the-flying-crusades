@@ -32,7 +32,7 @@ export default () => {
             <span style={{backgroundImage: `url(${session.user.image})` }} className={styles.avatar}/>
             <span className={styles.signedInText}>
               <small>Signed in as</small><br/>
-              <strong>{session.user.email || session.user.name}</strong>
+              <strong>{session.user.name}</strong>
               </span>
             <a
                 href={`/api/auth/signout`}
@@ -50,6 +50,7 @@ export default () => {
       <nav>
         <ul className={styles.navItems}>
           <li className={styles.navItem}><Link href="/"><a>Home</a></Link></li>
+          <li className={styles.navItem}><Link href="/store"><a>Store</a></Link></li>
           <li className={styles.navItem}><Link href="/client"><a>Client Side</a></Link></li>
           <li className={styles.navItem}><Link href="/server"><a>Server Side</a></Link></li>
           <li className={styles.navItem}><Link href="/protected"><a>Protected</a></Link></li>

@@ -1,0 +1,36 @@
+.storeItem {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem .5rem;
+  align-items: center;
+}
+
+.itemImage {
+  height: 50px;
+  width: 50px;
+}
+
+.itemName {
+  font-weight: bold;
+  font-size: larger;
+  margin: 1rem 0rem;
+}
+
+.itemButton {
+  margin-top: 1rem;
+  font-size: large;
+}
+
+.boughtAnimation {
+  background-color: green;
+  opacity: .3;
+  height: 50px;
+  width: 50px;
+}
+
+@keyframes bought {
+  to {
+    background-color: green;
+    opacity: .3;
+  }
+}
