@@ -15,10 +15,11 @@ export default ({ character }) => {
 
   return (
     <Layout>
-      <h1>Protected Page</h1>
-      <p>This page is protected using server side protection, you must be signed in to access it.</p>
-      <p>You can view this page because you are signed in.</p>
-
+      <h1>Your character sheet</h1>
+      <p>Name: {character.name}</p>
+      <p>Class: {character.class}</p>
+      <p>Gold: {character.gold} coins</p>
+      <p>Inventory: ...</p>
     </Layout>
   )
 }
@@ -29,23 +30,11 @@ export async function getServerSideProps(context) {
   // data avalible only to authenticated users, you can do that here by checking
   // the session object is not null or by accessing the contents of session.user
   const session = await getSession(context)
-  let character
 
   // TODO: Remove hardcoded name on fetch! 
-  try {
-    const response = await fetch('http://localhost:3000/api/get-character', {method: "POST", body: JSON.stringify({"name": 'theflyingdev'})})
+  const response = await fetch('http://localhost:3000/api/get-character', {method: "POST", body: JSON.stringify({"name": 'theflyingdev'})})
 
-    const res = await response.json()
-
-    if (res.status === 200) {
-      character = JSON.stringify(res)
-    }
-  } 
-  catch (error) {
-    console.log(error)
-
-    character = JSON.stringify(error)
-  }
+  const character = await response.json()
 
   return {
     props: { session, character }

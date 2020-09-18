@@ -1,5 +1,8 @@
 const MongoClient = require("mongodb").MongoClient
 
+// TODO: If user isn't found/db isn't connected - the user won't be able to buy or do anything in the store.
+// TODO: Add way to use dummy's money
+
 export default async function (req, res) {
     const data = JSON.parse(req.body)
 
