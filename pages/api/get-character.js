@@ -11,12 +11,24 @@ export default async function (req, res) {
 
         await client.close()
 
-        return res.status(200).end(JSON.stringify(character[0]))
+        return res.status(200).json(character[0])
     }
     catch {
-        return res.status(500).end("An error occurred when attempting to connect or updating the databse")
+        return res.status(500).json(
+            {
+                "name": "bob", 
+                "class": "adventurer", 
+                "gold": 500, 
+                "inventory": {
+                    "head": null,
+                    "body": null,
+                    "r-hand": null,
+                    "l-hand": null,
+                    "legs": null,
+                    "feet": null,
+                    "items": {"potion": 1}
+                 } 
+            }
+        )
     }
-    finally {
-        await client.close()
-    }
-}
+ }

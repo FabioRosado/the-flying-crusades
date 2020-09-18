@@ -23,8 +23,6 @@ export default ({ character }) => {
   )
 }
 
-
-
 export async function getServerSideProps(context) {
 
   // If you need to make calls to a service (e.g. an API or database) to make
@@ -36,25 +34,18 @@ export async function getServerSideProps(context) {
   // TODO: Remove hardcoded name on fetch! 
   try {
     const response = await fetch('http://localhost:3000/api/get-character', {method: "POST", body: JSON.stringify({"name": 'theflyingdev'})})
-    character = await response.json()
-  } 
-  catch {
-    character = {
-      "name": "bob", 
-      "class": "adventurer", 
-      "gold": 500, 
-      "inventory": {
-          "head": null,
-          "body": null,
-          "r-hand": null,
-          "l-hand": null,
-          "legs": null,
-          "feet": null,
-          "items": {"potion": 1}
-        } 
-    }
-  }
 
+    const res = await response.json()
+
+    if (res.status === 200) {
+      character = JSON.stringify(res)
+    }
+  } 
+  catch (error) {
+    console.log(error)
+
+    character = JSON.stringify(error)
+  }
 
   return {
     props: { session, character }
