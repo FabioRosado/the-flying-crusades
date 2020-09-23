@@ -20,8 +20,6 @@ export default () => {
         <ul className={styles.navItems}>
           <li className={styles.navItem}><Link href="/"><a>Home</a></Link></li>
           <li className={styles.navItem}><Link href="/store"><a>Store</a></Link></li>
-          <li className={styles.navItem}><Link href="/client"><a>Client Side</a></Link></li>
-          <li className={styles.navItem}><Link href="/server"><a>Server Side</a></Link></li>
           <li className={styles.navItem}><Link href="/character"><a>Character Sheet</a></Link></li>
         </ul>
       </nav>

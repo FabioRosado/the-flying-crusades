@@ -7,7 +7,6 @@ const Item = ({details, character}) => {
     const item = details
     const characterDetails = character
 
-    console.log(character)
 
     const buyItem = (charaterDetails, itemDetails) => {
         fetch("http://localhost:3000/api/buy-item", 
@@ -16,14 +15,18 @@ const Item = ({details, character}) => {
                 body: JSON.stringify({character: characterDetails, item: itemDetails})
             }
         )
-        .then(result => result.json())
+        .then(result => {
+            if (result.status !== 200) {
+                throw Error("Unable to buy item")
+            }
+            return result.json()
+        })
         .then(character => {
             setBought(true)
             localStorage.setItem("character", JSON.stringify(character))    
         } )
         .catch(error => {
-            console.warn("error")
-            console.log(error.status, error.message)
+            console.warn(error.message)
             setError(error)
         })
     }

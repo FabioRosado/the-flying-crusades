@@ -1,13 +1,23 @@
 import { signIn, signOut, useSession } from 'next-auth/client'
+import { useState, useEffect } from 'react'
 import styles from "./header.module.css"
 export default () => {
     const [ session, loading ] = useSession()
-    
+    const [ character, setCharacter ] = useState({})
+   // TODO: Add character info: name, gold and class
+   
+   useEffect(() => {
+     const char = localStorage.getItem("character")
+
+     setCharacter(JSON.parse(char))
+
+   }, [])
+
     return (
       <div className={styles.signedInStatus}>
-        <p className={`nojs-show ${(!session && loading) ? styles.loading : styles.loaded}`}>
+        <div className={`nojs-show ${(!session && loading) ? styles.loading : styles.loaded}`}>
           {!session && <>
-            <span className={styles.notSignedInText}>You are not signed in</span>
+            <div className={styles.notSignedInText}>You are not signed in</div>
             <a
                 href={`/api/auth/signin`}
                 className={styles.buttonPrimary}
@@ -19,13 +29,33 @@ export default () => {
                 Sign in
               </a>
           </>}
-          {session && <>
-            <span style={{backgroundImage: `url(${session.user.image})` }} className={styles.avatar}/>
-            <span className={styles.signedInText}>
-              <small>Signed in as</small><br/>
+          {session && <div className={styles.charInfo}>
+            <div style={{backgroundImage: `url(${session.user.image})` }} className={styles.avatar}/>
+            <div className={styles.info}>
+              <small>Name</small>
               <strong>{session.user.name}</strong>
-              </span>
-            <a
+            </div>
+            <div className={styles.info}>
+              <small>Class</small>
+              <strong>{character.class}</strong>
+            </div>
+            <div className={styles.info}>
+              <small>Level</small>
+              <strong>1</strong>
+            </div>           
+            <div className={styles.info}>
+              <small>Exp</small>
+              <strong>40/150</strong>
+            </div>            
+            <div className={styles.info}>
+              <small>Gold</small>
+              <strong>{character.gold}</strong>
+            </div>            
+            <div className={styles.info}>
+              <small>HP</small>
+              <strong>40/40</strong>
+            </div>
+           <a
                 href={`/api/auth/signout`}
                 className={styles.button}
                 onClick={(e) => {
@@ -35,8 +65,8 @@ export default () => {
               >
                 Sign out
               </a>
-          </>}
-        </p>
+          </div>}
+        </div>
       </div>
     )
 }

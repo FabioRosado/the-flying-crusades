@@ -90,3 +90,13 @@
   display: inline-block;
   margin-right: 1rem;
 }
+
+.charInfo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.info {
+ display: flex;
+ flex-direction: column; 
+}

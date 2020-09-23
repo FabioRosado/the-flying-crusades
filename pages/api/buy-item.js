@@ -10,7 +10,7 @@ export default async function (req, res) {
     const charName = data.character.name
 
     try {
-        const client = new MongoClient(process.env.MONGO_DB_URL, {useUnifiedTopology: true})
+        const client = new MongoClient(process.env.MONGO_DB_URL, {reconnectTries: 5, connectTimeoutMS: 3000})
         await client.connect()
 
         const collection = await client.db(process.env.MONGO_DB_NAME).collection(charName.toLowerCase())
@@ -28,7 +28,6 @@ export default async function (req, res) {
             }
 
             await collection.updateOne({"name": charName.toLowerCase()}, {$set: {"inventory": character.inventory, "gold": character["gold"]}})
-
         }
 
         await client.close()
@@ -37,8 +36,5 @@ export default async function (req, res) {
     }
     catch(error) {
         return res.status(500).end("An error occurred when attempting to connect or updating the databse")
-    }
-    finally {
-        await client.close()
     }
 }
